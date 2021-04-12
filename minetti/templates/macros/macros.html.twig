@@ -1,0 +1,27 @@
+{% macro nav_loop(page) %}
+  {% import _self as macros %}
+  {% for p in page.children.visible %}
+{#     Show if access and user is logged in #}
+{#     {% if (p.header.access['site.login'] and grav.user.username) or (not p.header.access['site.login']) %} #}
+      {% set active_page = p.active ? 'active' : '' %}
+      {% set active_page = p.activeChild ? 'active_child' : active_page %}
+      {% set external_page = p.header.external_url ? 'external' : '' %}
+      {% if p.children.visible.count > 0 %}
+        <li class="chilled">
+          <span class="{{ active_page }}">{{ p.menu }}</span>
+          <ol>
+            {{ macros.nav_loop(p) }}
+          </ol>
+        </li>
+      {% else %}
+        <li {{ external_page }}>
+        {% if p.active %}
+          <span class="{{ active_page }}">{{ p.menu }}</span>
+        {% else %}
+          <a href="{{ p.url }}" class="{{ active_page }}">{{ p.menu }}</a>
+        {% endif %}
+        </li>
+      {% endif %}
+{#     {% endif %} #}
+  {% endfor %}
+{% endmacro %}

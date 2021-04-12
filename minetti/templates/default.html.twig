@@ -1,0 +1,11 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+  
+  {% if grav.messages.all %}
+  {% include 'partials/messages.html.twig' %}
+  {% endif %}
+  
+  {{ page.content|raw }}
+      
+{% endblock %}

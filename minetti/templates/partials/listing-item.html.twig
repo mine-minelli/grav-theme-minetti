@@ -1,0 +1,6 @@
+{% set img = page.media.images|first %}
+
+<li>
+  {{ img.cropResize(150, 150).html|raw }}
+  <a href="{{ page.url }}">{{ page.title }}</a>
+</li>

@@ -1,0 +1,7 @@
+{% import 'macros/macros.html.twig' as macros %}
+<div hidden data-menu-button>
+<span>Menu</span>
+</div>
+<ul data-menu hidden>
+    {{ macros.nav_loop(pages) }}
+</ul>

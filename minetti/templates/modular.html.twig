@@ -1,0 +1,15 @@
+{% extends 'partials/base.html.twig' %}
+{#
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% do assets.addCss('theme://css-compiled/modular.css') %}
+{% endblock %}
+#}
+
+
+{% block content %}
+  {% for module in page.collection() %}
+      {{ module.content|raw }}
+  {% endfor %}
+{% endblock %}

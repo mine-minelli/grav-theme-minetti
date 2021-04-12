@@ -1,0 +1,287 @@
+/*
+ Link, Visited, Hover, Active. If you're including :focus styling for your link, it's common to add it between "hover" and "active". 
+*/
+
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 10px;
+//   scroll-behavior: smooth;
+}
+@media screen and (prefers-reduced-motion: reduce) {
+  html,
+  body {
+//     scroll-behavior: smooth;
+  }
+  *, *:before, *:after {
+      transition: unset !important;
+      animation: unset !important;
+  }
+}
+html.nojs .jsed {
+  display: none;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+body {
+  font-size: 1.4em;
+  font-size: clamp(1.4rem, calc(0.6rem + 0.7vw), 2.2rem);
+  font-family: $font-stack;
+  margin: 0;
+  padding: 1em;
+  color: $color-text;
+  background: $color-bg-light;
+}
+
+a {
+  @extend %focus;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+  @extend %title;
+}
+
+h1 {
+  font-size: 2.4em;
+}
+h2 {
+  font-size: 2.0em;
+}
+h3 {
+  font-size: 1.7em;
+}
+h4 {
+  font-size: 1.4em;
+}
+h5 {
+  font-size: 1.2em;
+}
+h6 {
+  font-size: 1.0em;
+}
+
+
+
+p {
+  margin: $gap 0;
+}
+
+small,
+.small {
+  font-size: smaller;
+  @media screen and (min-width: $media-min-width) {
+    font-size: 73%;
+  }
+}
+
+pre {
+  text-align: left;
+  white-space: pre-line;
+}
+
+img {
+  max-width: 100%;
+}
+
+figure {
+  margin: 0;
+}
+
+address {
+    font-style: normal;
+}
+
+
+nav > {
+  ul, ol {
+      list-style: none;
+      padding-left: 0;
+  }
+}
+
+::selection {
+  background: $color-text;
+  color: $color-bg-light;
+}
+:placeholder {
+  color: $color-text;
+}
+.screen-reader-text {
+  @extend %screen-reader-text;
+}
+
+body {
+	display: grid;
+	grid-template-areas:
+		"header"
+/*		"sidebar"*/
+		"main"
+/*		"sidebar-right"*/
+		"footer";
+	grid-template-rows: auto 1fr auto;
+// 	grid-template-rows: auto auto 1fr auto auto;
+	
+	
+  > header {
+  	grid-area: header;
+  }
+  
+/*
+  > aside:nth-of-type(1) {
+  	grid-area: sidebar;
+  }
+*/
+  > main {
+  	grid-area: main;
+  }
+/*
+  > aside:nth-of-type(2) {
+  	grid-area: sidebar-right;
+  }
+*/
+  > footer {
+  	grid-area: footer;
+  }
+  @media (min-width: $media-min-width) { /* Breakpoint Tablet portrait up */
+  	& {
+  		grid-template-areas:
+  			"header header header"
+  			"main main main"
+  			"footer footer footer";
+  		grid-template-rows: auto 1fr auto;
+  		grid-template-columns: 20% 1fr 20%;
+  	}
+  }
+
+}
+
+
+
+.flexy {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    @media screen and (min-width: $media-min-width) {
+        flex-direction: row;
+    }
+    .col {
+        &-1 {
+            flex-basis: 100%;
+        }
+        &-2 {
+            flex-basis: 50%;
+        }
+        &-3 {
+            flex-basis: 33.33333333%;
+        }
+        &-4 {
+            flex-basis: 25%;
+        }
+        &-5 {
+            flex-basis: 20%;
+        }
+    }
+}
+
+
+
+// Header
+#skip-navigation:focus {
+//     color: $white;
+//     @extend %sans;
+//     margin: auto 80px;
+}
+header#top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  // This is where the Albatross Magic is happening now
+  &:before {
+    content: "";
+    flex-grow: 666;
+    flex-basis: calc((58rem - 100%) * 666);
+  }
+  > * {
+    flex-grow: 1;
+    text-align: center;
+  }
+  // Drag the first child to the beginning, so that the pseudo 
+  // element moves to the center
+//   > *:first-child
+  .brand {
+    order: -1;
+  }
+}
+
+/*
+.main-name {
+    font-size: small;
+    a {
+        &:hover {
+        }
+    }
+    h1 {
+        position: relative;
+    }
+}
+*/
+.main-nav {
+/*
+    display: flex;
+    position: relative;
+    font-size: smaller;
+*/
+    .nav_toggle {
+/*
+        position: absolute;
+        right: 0;
+        z-index: 1;
+        
+        font-size: 1em;
+        padding: 1rem;
+        color: $white;
+        background: none;
+        border: none;
+*/
+/*
+        &:after {
+            content: '+';
+        }
+        &[aria-expanded="true"] {
+            &:after {
+                content: '-';
+            }
+        }
+*/
+//         @extend %focus;
+    }
+/*
+    >ul {
+        margin: 0 auto $gap;
+        padding: 0 1.7rem;
+        >li {
+            > a,
+            > .a,
+            .active {
+                color: $color-link;
+                font-weight: 600;
+            }
+        }
+        >li:not(.chilled) >.active_child,
+        .active {
+            color: $theme;
+        }
+    }
+*/
+}

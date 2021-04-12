@@ -1,0 +1,76 @@
+{% set body_classes = page.header.body_classes %}
+<!DOCTYPE html>
+<html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}" class="nojs">
+<head>
+{% block head deferred %}
+    <meta charset="utf-8" />
+    <link rel="canonical" href="{{ page.url(true, true) }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'partials/metadata.html.twig' %}
+  
+    <title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+
+    
+    {% if not uri.query('headless') %}
+{#
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#ffffff">
+#}
+    {% endif %}
+
+{% endblock head %}
+
+
+{% block stylesheets %}
+    {% do assets.addCss('theme://css-compiled/theme.css',103) %}
+{% endblock %}
+
+{% block javascripts %}
+{#     {% do assets.addJs('jquery', 101) %} #}
+{% endblock %}
+  
+{% block assets deferred %}
+    {{ assets.css()|raw }}
+    {{ assets.js()|raw }}
+{% endblock %}
+    
+</head>
+
+
+<body class="{{ body_classes ? body_classes : ''}}">
+
+
+
+  {% block header %}
+    {% include 'partials/header.html.twig' %}
+  {% endblock %}
+  
+  
+  <main role="main" id="content">
+    {% block content %}
+    {% endblock %}
+  </main>
+  
+
+  {% block footer %}
+    {% include 'partials/footer.html.twig' %}
+  {% endblock %}
+
+
+  {% block bottom %}
+    {% do assets.addJs('theme://js/theme.js', {'group':'bottom', 'loading': 'defer'}) %}
+{#     {% do assets.addJs('theme://js/scripts.js', {'group':'bottom', 'loading': 'defer'}) %} #}
+  {% endblock %}
+
+  {% block assets_bottom deferred %}
+      {{ assets.js('bottom')|raw }}
+  {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+// ___
+
+$media-min-width: 40em;
+
+$gap: 2rem;
+
+// COLORS
+$color-main: black;
+$color-text: darkslategray ;
+$color-link: royalblue;
+$color-bg-dark: dimgray;
+$color-bg-medium: darkgray;
+$color-bg-light: whitesmoke;
+$focus: palevioletred;
+
+
+// FONT
+$font-mono: Andale Mono,AndaleMono,monospace;
+$font-stack: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+// $font-stack: Helvetica Neue,Helvetica,Arial,sans-serif;
+$font-title: $font-mono;
+
+// Extend/Inheritance
+// https://sass-lang.com/guide#topic-7
+// @extend %
+
+%title {
+  font-family: $font-title;
+  font-weight: 400;
+}
+%sans {
+  font-family: $font-stack;
+  letter-spacing: .1rem;
+  font-variant: small-caps;
+  font-weight: 400;
+}
+%left {
+  text-align: left;
+}
+%center {
+  text-align: center;
+}
+%right {
+  text-align: right;
+}
+%smoothy {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+%focus {
+  &:focus {
+    outline: 2px dotted;
+    outline-offset: .2em;
+  }
+}
+%screen-reader-text {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  clip: rect(1px 1px 1px 1px); // IE 6 and 7
+  clip: rect(1px,1px,1px,1px);
+  clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+  -webkit-clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+  overflow: hidden !important;
+  &:focus,
+  &:active,
+  &:hover {
+    clip: auto;
+    clip-path: none;
+    -webkit-clip-path: none;
+    width: auto;
+    height: auto;
+    z-index: 9999;
+  }
+}
+
+
+// Mixins
+// https://sass-lang.com/guide#topic-6
+// @include
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  >:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@mixin hover-supported {
+  @media not all and (hover: none) {
+    &:hover {
+        @content;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+$phi: 1.6180339887498948482;
+/*
+A = 61.803399
+B = 38.196601
+A+B = 100
+
+A+B : A = A : B
+*/
+// Dato A+B = 100 (%)
+$goldenAB: 100%;
+$goldenA: $goldenAB / $phi;
+$goldenB: ($goldenA * $goldenA) / $goldenAB;
+// Smaller Ratio: from B $goldenB
+$goldenBSmall: $goldenB / $phi;
+$goldenBBSmall: ($goldenBSmall * $goldenBSmall) / $goldenB;
+// Smaller Ratio: from A $goldenA
+$goldenASmall: $goldenA / $phi;

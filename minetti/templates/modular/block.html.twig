@@ -1,0 +1,9 @@
+{% set title = header.title_html ? header.title_html : page.title %}
+{% set classes = header.classes %}
+
+<section {% if classes %}class="{{ classes }}"{% endif %}>
+  {% if not header.no_title %}
+  <h2 class="title">{{ title|raw }}</h2>
+  {% endif %}
+  {{ page.content|raw }}
+</section>
